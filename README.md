@@ -1,4 +1,7 @@
+
+### <br>Padrões de projeto completo >>> https://refactoring.guru/pt-br/design-patterns/java
 Padrões de projeto são soluções genéricas para problemas recorrentes do desenvolvimento de software orientado a objetos;
+
 <br>Existem três principais categorias de padrões de projeto:
 - Comportamentais (que serão vistos neste treinamento)
 - Estruturais
