@@ -1,27 +1,26 @@
 package com.padroes.loja.pedido;
 
 import com.padroes.loja.orcamento.Orcamento;
+import com.padroes.loja.pedido.acao.AcaoAposGerarPedido;
+import com.padroes.loja.pedido.acao.EnviarEmailPedido;
+import com.padroes.loja.pedido.acao.SalvasPedidoBancioDeDados;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 //metodos commands
 public class GeraPedidosHandler {
 
-    //construtor com injecao de dependencia: repository, service, etc.
+    private List<AcaoAposGerarPedido> acoes;
+    public GeraPedidosHandler(List<AcaoAposGerarPedido> acoes) {
+        this.acoes = acoes;
+    }
 
     public void executar(GerarPedidos dados){
 
         Orcamento orcamento = new Orcamento(dados.getValorOrcamento(), dados.getQuantidadeItens());
-        String cliente = " Ana da Silva";
-        LocalDateTime data = LocalDateTime.now();
-
         Pedido pedido = new Pedido(dados.getCliente(), LocalDateTime.now(), orcamento);
-
-        System.out.println("Salvar pedido no banco de dados");
-        System.out.println("Enviar email com dados do novo pedido");
-
-
-
+        acoes.forEach(a ->a.executarAcao(pedido));
     }
 
 
