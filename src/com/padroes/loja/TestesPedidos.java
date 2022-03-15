@@ -1,6 +1,8 @@
 package com.padroes.loja;
 
 import com.padroes.loja.orcamento.Orcamento;
+import com.padroes.loja.pedido.GeraPedidosHandler;
+import com.padroes.loja.pedido.GerarPedidos;
 import com.padroes.loja.pedido.Pedido;
 
 import java.math.BigDecimal;
@@ -9,17 +11,13 @@ import java.time.LocalDateTime;
 public class TestesPedidos {
 
     public static void main(String[] args) {
+        String cliente = args[0];
+        BigDecimal valorOrcamento = new BigDecimal(args[1]);
+        int quantidadeItens = Integer.parseInt(args[2]);
 
-
-        Orcamento orcamento = new Orcamento(new BigDecimal("600"), 4);
-        String cliente = " Ana da Silva";
-        LocalDateTime data = LocalDateTime.now();
-
-        Pedido pedido = new Pedido(cliente, data, orcamento);
-
-        System.out.println("Salvar pedido no banco de dados");
-        System.out.println("Enviar email com dados do novo pedido");
-
+        GerarPedidos gerador = new GerarPedidos(cliente, valorOrcamento, quantidadeItens);
+        GeraPedidosHandler handler = new GeraPedidosHandler(/* dependencias */);
+        handler.executar(gerador);
 
     }
 
